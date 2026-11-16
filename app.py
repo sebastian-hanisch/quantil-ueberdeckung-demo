@@ -90,7 +90,7 @@ if s.welt == C.WELT_HAND:
     h = ev.hand(s.tau)
     methods = ev.hand_methods(h)
     st.plotly_chart(build_hand(h), width="stretch", key="main_chart")
-    st.caption("Grau: die zehn Beobachtungen. Orange: obere Grenze „Gruppenmittel + z·s“ mit einem gemeinsamen s. Grün: Minimierer des Pinball-Verlusts je Gruppe (eine Strecke, wenn n·τ ganzzahlig ist). Gedeckt heißt y ≤ Grenze; die Zahlen gelten im Training.")
+    st.caption("Grau: die zehn Beobachtungen. Orange: obere Grenze „Gruppenmittel + z·s“ mit einem gemeinsamen s. Grün: Minimierer des Pinball-Verlusts je Gruppe (bei Gruppen eine Strecke, wenn n·τ ganzzahlig ist). Gedeckt heißt y ≤ Grenze; die Zahlen gelten im Training.")
 else:
     res = _sample(s.welt, s.n, s.seed, s.tau)
     methods = res["methods"]
@@ -184,7 +184,7 @@ st.markdown(
 | **Richtige Modellform der Quantilfunktion** | Wächst die Streuung quadratisch und wird eine Gerade angepasst, trifft auch die Quantilregression die obere Gruppe nicht (Rohskala B, n = 1 000, τ = 0,9: 0,869 statt 0,9, bei 0,946 in der mittleren Gruppe). | Rohskala B |
 | **Die Quantilregression repariert kein falsches Mittelwertmodell** | Fehlt ein Wochenend-Koeffizient je Art, bleiben einzelne Zellen Art × Wochenende bei beiden Verfahren daneben. | Container, 8 gegen 11 Parameter |
 | **Eine Gruppe mit bekannter Streuung** (Containerart) | Dann reicht Kleinste Quadrate ± z·s mit einem s je Art: kein Gewinn durch die Quantilregression. Das gilt nur, wenn die Gruppe die Streuung erklärt. | Experiment 1, Container |
-| **Bedingte Überdeckung ist verteilungsfrei nicht zu garantieren** | Auch konforme Verfahren garantieren nur die Überdeckung im Mittel über die Merkmalswerte, nicht je Gruppe (Foygel Barber u. a.); sie sind hier nicht nachgebaut. | Verweis, nicht gemessen |
+| **Bedingte Überdeckung ist verteilungsfrei nicht zu garantieren** | Konforme Standardverfahren garantieren nur die Überdeckung im Mittel über die Merkmalswerte; bedingt auf einen einzelnen Punkt ist verteilungsfrei keine Garantie möglich (Foygel Barber u. a.), für vorab bekannte Gruppen gibt es gruppenweise Varianten; sie sind hier nicht nachgebaut. | Verweis, nicht gemessen |
 """
 )
 
@@ -232,9 +232,9 @@ $$s^2 \to 0{,}04 + 0{,}16 \cdot 5 + 0{,}16 \cdot \tfrac{100}{3} = \tfrac{463}{75
 
 $$\#\{i : r_i < 0\} \;\le\; n\,\tau \;\le\; \#\{i : r_i \le 0\}.$$
 
-Folge: Ist $n(1-\tau) < 1$, liegen alle Punkte auf oder unter der Geraden; eine Stufe nahe 1 mit zu wenig Daten deckt im Training alles und sagt über den Rand nichts. Ist $n\tau$ ganzzahlig, ist die Menge der Minimierer eine Strecke (Handbeispiel); darum vergleichen Tests den Verlust, nicht die Koeffizienten.
+Folge: Ist $n(1-\tau) < 1$, liegen alle Punkte auf oder unter der Geraden; eine Stufe nahe 1 mit zu wenig Daten deckt im Training alles und sagt über den Rand nichts. Ist $n\tau$ ganzzahlig, ist die Menge der Minimierer bei einer Konstanten oder bei Gruppenmitteln eine Strecke (Handbeispiel), mit stetigen Merkmalen in der Regel ein Punkt; darum vergleichen Tests den Verlust, nicht die Koeffizienten.
 
-**Literatur** (nur, soweit gelesen; ein Wortlaut wird nicht übernommen). Koenker und Bassett 1978, *Regression Quantiles*, Econometrica 46(1), 33–50: Abstract gelesen (Regressionsquantile als Verallgemeinerung der Stichprobenquantile auf das lineare Modell). Koenker 2005, *Quantile Regression*, Cambridge: nur die Kapitelliste. Foygel Barber, Candès, Ramdas und Tibshirani, *The limits of distribution-free conditional predictive inference*, arXiv 1903.04684: Wortlaut gelesen; exakte **bedingte** Überdeckung ist verteilungsfrei nicht zu garantieren. Romano, Patterson und Candès, *Conformalized Quantile Regression*, arXiv 1905.03222: nur als Verweis, hier nicht nachgebaut.
+**Literatur** (nur, soweit gelesen; ein Wortlaut wird nicht übernommen). Koenker und Bassett 1978, *Regression Quantiles*, Econometrica 46(1), 33–50: Abstract gelesen (Regressionsquantile als Verallgemeinerung der Stichprobenquantile auf das lineare Modell). Koenker 2005, *Quantile Regression*, Cambridge: nur die Kapitelliste. Foygel Barber, Candès, Ramdas und Tibshirani, *The limits of distribution-free conditional predictive inference*, arXiv 1903.04684: Abstract gelesen; exakte **bedingte** Überdeckung ist ohne Verteilungsannahme nicht zu garantieren. Romano, Patterson und Candès, *Conformalized Quantile Regression*, arXiv 1905.03222: nur als Verweis, hier nicht nachgebaut.
         """
     )
 

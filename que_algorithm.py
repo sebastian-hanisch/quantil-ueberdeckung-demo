@@ -55,7 +55,7 @@ def pinball(r, tau: float) -> float:
 
 
 def qr_fit(X: np.ndarray, y: np.ndarray, tau: float):
-    """Lineare Quantilregression als Linearprogramm; gibt (Koeffizienten, Zielwert) zurück. Bei ganzzahligem n·tau ist das Minimum eine Strecke: welches Ende der Löser
+    """Lineare Quantilregression als Linearprogramm; gibt (Koeffizienten, Zielwert) zurück. Bei ganzzahligem n·tau ist das Minimum bei Konstanten und Gruppenmitteln eine Strecke (mit stetigen Merkmalen in der Regel eindeutig): welches Ende der Löser
     liefert, ist eine Eigenschaft des Lösers (darum vergleichen Tests den Verlust, nicht die Koeffizienten). Braucht n >= p."""
     n, p = X.shape
     if not 0.0 < tau < 1.0:

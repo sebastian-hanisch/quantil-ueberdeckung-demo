@@ -307,7 +307,7 @@ def verdict_amount(welt: str, tau: float, cells: list[tuple[int, dict]]) -> tupl
              f" Gesamt bei n = {de_int(n0)}: Kleinste Quadrate ± z·s {de(o0['total'])}, Quantilregression {de(q0['total'])}; in den Gruppen {_groups_text(o0, welt)} gegen {_groups_text(q0, welt)}.")
     if c0.get("cross") is not None and tau > 0.5:
         text += (f" Die Gerade der Stufe {tau_text(1 - tau)} liegt an einer der Randstellen x = 0 oder x = 10 über der Geraden der Stufe {tau_text(tau)} in {pct(c0['cross'])} der Wiederholungen bei n = {de_int(n0)}"
-                 f" und in {pct(c1['cross'])} bei n = {de_int(n1)} (nur diese zwei Randstellen geprüft).")
+                 f" und in {pct(c1['cross'])} bei n = {de_int(n1)} (nur diese zwei Randstellen geprüft; einzelne Ziehung je Zelle mit Zufallsfehler).")
     kind = "warning" if abs(q0["total"] - tau) > C.MEAN_GAP else "info"
     return kind, text
 
